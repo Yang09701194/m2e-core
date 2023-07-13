@@ -39,6 +39,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.internal.WorkbenchIntroManager;
 
 import org.codehaus.plexus.util.FileUtils;
 
@@ -151,6 +152,7 @@ public class ArchetypeGenerator {
       String goals = "-U " + ArchetypePlugin.ARCHETYPE_PREFIX + ":generate";
       mavenRun = mavenLauncher.runMaven(workingDir[0], goals, userProperties, interactive);
       subMonitor.worked(1);
+      WorkbenchIntroManager.setIntroStandby();
       Display current = Display.getCurrent();
       while(!mavenRun.isDone()) {
         if(current != null) {
